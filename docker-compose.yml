@@ -7,7 +7,6 @@ networks:
 services: 
     nginx:
         image: nginx:alpine
-        container_name: nginx
         restart: unless-stopped
         tty: true
         ports:
@@ -23,11 +22,12 @@ services:
 
     mysql:
         image: mysql
-        container_name: mysql
         restart: unless-stopped
         tty: true
         ports: 
             - "4306:3306"
+        expose:
+            - "3306"
         volumes: 
             - ./mysql:/var/lib/mysql
         environment: 
@@ -39,12 +39,12 @@ services:
             SERVICE_NAME: mysql
         networks: 
             - laravel
+        command: --authentication-policy=mysql_native_password
 
     php:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: php
         restart: unless-stopped
         tty: true
         working_dir: /var/www/app
