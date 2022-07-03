@@ -1,2 +1,2 @@
-const baseUrl = "http://localhost:8002/"
+const baseUrl = "http://172.104.50.161:8002/"
 export default baseUrl;
