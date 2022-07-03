@@ -90,6 +90,8 @@ function KanbanCreate() {
           }
       ).then((response) => {
         alert(response?.data?.status)
+      }).error((e) => {
+        alert("Error")
       })
     }}>
       <div className="grid grid-cols-12 py-4 px-6">
