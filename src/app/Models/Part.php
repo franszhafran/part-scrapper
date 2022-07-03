@@ -16,4 +16,8 @@ class Part extends Model
     public function kanban() {
         return $this->hasManyThrough(Kanban::class, KanbanPart::class, "id_part", "id_kanban", "id", "id");;
     }
+
+    public function library() {
+        return $this->hasOne(Library::class, "name", "part_name");
+    }
 }

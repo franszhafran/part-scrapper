@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kanban;
 use App\Models\KanbanPart;
+use App\Models\Library;
 use App\Models\Part;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,18 +51,22 @@ class ImportController extends Controller
                 if($part_no == "") {
                     continue;
                 }
-    
+
+                $library = Library::where("part_no", $part_no)->first();
+                if(!$library) {
+                    throw new \Exception("Part no " . $part_no . " not in library");
+                }
+                
                 $part = Part::create([
                     "number" => $part_no,
                     "name" => $part_name,
                     "qty" => $qty,
                     "sym_part" => $sym,
-                    "qty" => $qty,
                     "spare" => $spare,
                     "material" => $material,
                     "remark" => $remark,
                     "check" => $check,
-                    "price" => 1000,
+                    "price" => $library->price,
                 ]);
     
                 $parts[] = $part->id;
@@ -101,31 +106,31 @@ class ImportController extends Controller
             $highestRow = $worksheet->getHighestRow();
             $highestColumn = $worksheet->getHighestColumn();
             $parts = [];
-            for ($row = 11; $row <= $highestRow; ++$row) {
+            for ($row = 11; $row <= 350; ++$row) {
                 $part_no = $worksheet->getCellByColumnAndRow("1", $row)->getValue();
-                $part_name = $worksheet->getCellByColumnAndRow("2", $row)->getValue();
-                $sym = $worksheet->getCellByColumnAndRow("3", $row)->getValue();
-                $qty = intval($worksheet->getCellByColumnAndRow("4", $row)->getValue());
-                $spare = $worksheet->getCellByColumnAndRow("5", $row)->getValue();
-                $material = $worksheet->getCellByColumnAndRow("6", $row)->getValue();
-                $remark = $worksheet->getCellByColumnAndRow("7", $row)->getValue();
-                $check = $worksheet->getCellByColumnAndRow("8", $row)->getValue();
+                $die_no = $worksheet->getCellByColumnAndRow("2", $row)->getValue();
+                $process = $worksheet->getCellByColumnAndRow("3", $row)->getValue();
+                $part_name = intval($worksheet->getCellByColumnAndRow("4", $row)->getValue());
+                $material = $worksheet->getCellByColumnAndRow("5", $row)->getValue();
+                $remark = $worksheet->getCellByColumnAndRow("6", $row)->getValue();
+                $maker = $worksheet->getCellByColumnAndRow("7", $row)->getValue();
+                $code = $worksheet->getCellByColumnAndRow("8", $row)->getValue();
+                $price = $worksheet->getCellByColumnAndRow("9", $row)->getValue();
     
                 if($part_no == "") {
                     continue;
                 }
-    
-                $part = $table->string("part_no");
-                $table->string("die_no");
-                $table->string("process");
-                $table->string("part_name");
-                $table->string("material");
-                $table->string("remark");
-                $table->string("maker");
-                $table->string("code");
-                $table->string("price");
+
                 Library::create([
-                    "part_no" => $
+                    "part_no" => $part_no,
+                    "die_no" => $die_no,
+                    "process" => $process,
+                    "part_name" => $part_name,
+                    "material" => $material,
+                    "remark" => $remark,
+                    "maker" => $maker,
+                    "code" => $code,
+                    "price" => $price,
                 ]);
             }
             DB::commit();
