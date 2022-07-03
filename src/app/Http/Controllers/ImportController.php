@@ -53,8 +53,9 @@ class ImportController extends Controller
                 }
 
                 $library = Library::where("part_no", $part_no)->first();
-                if(!$library) {
-                    throw new \Exception("Part no " . $part_no . " not in library");
+                $price = 0;
+                if($library) {
+                    $price = $library->price;
                 }
                 
                 $part = Part::create([
@@ -66,7 +67,7 @@ class ImportController extends Controller
                     "material" => $material,
                     "remark" => $remark,
                     "check" => $check,
-                    "price" => $library->price,
+                    "price" => 0,
                 ]);
     
                 $parts[] = $part->id;
@@ -91,10 +92,9 @@ class ImportController extends Controller
 
         try {
             DB::beginTransaction();
-            $kanban = Kanban::create([
-                "name" => $request->kanban_name,
-            ]);
-    
+
+            Library::truncate();
+
             $input_file = $request->file("kanban_file");
             if(is_null($input_file)) {
     
@@ -110,7 +110,7 @@ class ImportController extends Controller
                 $part_no = $worksheet->getCellByColumnAndRow("1", $row)->getValue();
                 $die_no = $worksheet->getCellByColumnAndRow("2", $row)->getValue();
                 $process = $worksheet->getCellByColumnAndRow("3", $row)->getValue();
-                $part_name = intval($worksheet->getCellByColumnAndRow("4", $row)->getValue());
+                $part_name = $worksheet->getCellByColumnAndRow("4", $row)->getValue();
                 $material = $worksheet->getCellByColumnAndRow("5", $row)->getValue();
                 $remark = $worksheet->getCellByColumnAndRow("6", $row)->getValue();
                 $maker = $worksheet->getCellByColumnAndRow("7", $row)->getValue();
@@ -126,10 +126,10 @@ class ImportController extends Controller
                     "die_no" => $die_no,
                     "process" => $process,
                     "part_name" => $part_name,
-                    "material" => $material,
+                    "material" => !is_null($material) ? $material : "",
                     "remark" => $remark,
-                    "maker" => $maker,
-                    "code" => $code,
+                    "maker" => !is_null($maker) ? $maker : "",
+                    "code" => !is_null($code) ? $code : "",
                     "price" => $price,
                 ]);
             }

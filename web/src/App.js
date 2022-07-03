@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="w-screen grid grid-cols-12">
-      <div className="col-span-3 bg-green-700 h-screen py-16">
+      <div className="col-span-2 bg-green-700 h-screen py-16">
         <div className="w-full text-center font-bold text-white mb-4">Part Management System</div>
         {menu.map((item, i) => {
           return (
@@ -35,7 +35,7 @@ function App() {
         })}
         <a className=""></a>
       </div>
-      <div className="col-span-9 bg-gray-200 h-screen py-16 px-8">
+      <div className="col-span-10 bg-gray-200 h-screen py-16 px-8 overflow-y-auto">
         <div className="w-full h-100 bg-white rounded-t-lg">
           <Routes>
             <Route exact path="/" element={<Kanban />}></Route>

@@ -27,9 +27,15 @@ function Library() {
       <table className="w-full rounded-t">
         <thead>
           <tr className="bg-gray-100 text-green-600 rounded">
-            <th className='p-2'>No</th>
-            <th className='p-2'>Kanban</th>
-            <th className='p-2'>Aksi</th>
+            <th className='p-2'>Die No</th>
+            <th className='p-2'>Part No</th>
+            <th className='p-2'>Process</th>
+            <th className='p-2'>Part Name</th>
+            <th className='p-2'>Material</th>
+            <th className='p-2'>Remark</th>
+            <th className='p-2'>Maker</th>
+            <th className='p-2'>Code</th>
+            <th className='p-2'>Price</th>
           </tr>
         </thead>
         <tbody>
@@ -37,9 +43,15 @@ function Library() {
             console.log(item)
             return (
               <tr>
-                <th className='font-normal p-2'>{i+1}</th>
-                <th className='font-normal p-2'>{item.name}</th>
-                <th className='font-normal p-2 cursor-pointer'><Link to={"/kanban/"+item.id}>Lihat</Link></th>
+                <th className='font-normal p-2'>{item.die_no}</th>
+                <th className='font-normal p-2'>{item.part_no}</th>
+                <th className='font-normal p-2'>{item.process}</th>
+                <th className='font-normal p-2'>{item.part_name}</th>
+                <th className='font-normal p-2'>{item.material}</th>
+                <th className='font-normal p-2'>{item.remark}</th>
+                <th className='font-normal p-2'>{item.maker}</th>
+                <th className='font-normal p-2'>{item.code}</th>
+                <th className='font-normal p-2'>{item.price}</th>
               </tr>
             )
           })}

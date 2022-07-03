@@ -20,3 +20,4 @@ Route::post("/import-library", [ImportController::class, "importLibrary"]);
 
 Route::get("/kanban", [KanbanController::class, "index"]);
 Route::get("/kanban/{id}", [KanbanController::class, "show"]);
+Route::get("/library", [KanbanController::class, "library"]);

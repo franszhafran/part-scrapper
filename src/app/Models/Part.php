@@ -18,6 +18,6 @@ class Part extends Model
     }
 
     public function library() {
-        return $this->hasOne(Library::class, "name", "part_name");
+        return $this->hasOne(Library::class, "part_no", "number");
     }
 }

@@ -28,7 +28,7 @@ function KanbanShow() {
       <div className="w-full flex flex-row-reverse mb-4">
         <Link to="/kanban/create"><button className='px-4 py-2 bg-green-600 text-white rounded'>Buat Kanban</button></Link>
       </div>
-      <table className="w-full rounded-t overflow-y-auto">
+      <table className="w-full rounded-t overflow-y">
         <thead>
           <tr className="bg-gray-100 text-green-600 rounded">
             <th className='p-2'>Part No</th>
@@ -46,19 +46,24 @@ function KanbanShow() {
         </thead>
         <tbody>
           {kanban.parts.map((item, i) => {
+            item.code = "-"
+            if(item.library !== null) {
+              item.price = item.library.price
+              item.code = item.library.code
+            }
             return (
               <tr>
-                <td className='p-2'>{i+1}</td>
+                <td className='p-2'>{item.number}</td>
                 <td className='p-2'>{item.name}</td>
                 <td className='p-2'>{item.qty}</td>
-                <td className='p-2'>C</td>
+                <td className='p-2'>{item.code}</td>
                 <td className='p-2'>{item.price}</td>
                 <td className='p-2'>{item.price*item.qty}</td>
-                <td className='p-2'>{item.number == "D" ? item.price*item.price : 0}</td>
-                <td className='p-2'>{item.number == "T" ? item.price*item.price : 0}</td>
-                <td className='p-2'>{item.number == "C" ? item.price*item.price : 0}</td>
-                <td className='p-2'>{item.number == "M" ? item.price*item.price : 0}</td>
-                <td className='p-2'>{item.number == "PC" ? item.price*item.price : 0}</td>
+                <td className='p-2'>{item.code == "D" ? item.price*item.qty : 0}</td>
+                <td className='p-2'>{item.code == "T" ? item.price*item.qty : 0}</td>
+                <td className='p-2'>{item.code == "C" ? item.price*item.qty : 0}</td>
+                <td className='p-2'>{item.code == "M" ? item.price*item.qty : 0}</td>
+                <td className='p-2'>{item.code == "PC" ? item.price*item.qty : 0}</td>
               </tr>
             )
           })}
