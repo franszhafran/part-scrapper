@@ -91,9 +91,8 @@ class ImportController extends Controller
         ]);
 
         try {
-            DB::beginTransaction();
-
             Library::truncate();
+            DB::beginTransaction();
 
             $input_file = $request->file("kanban_file");
             if(is_null($input_file)) {
