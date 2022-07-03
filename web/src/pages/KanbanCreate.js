@@ -90,7 +90,7 @@ function KanbanCreate() {
           }
       ).then((response) => {
         alert(response?.data?.status)
-      }).error((e) => {
+      }).catch((e) => {
         alert("Error")
       })
     }}>
