@@ -6,7 +6,7 @@ function Kanban() {
   const [listKanban, setListKanban] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:8001/kanban")
+    axios.get("http://45.118.135.250/kanban")
     .then((response) => {
       console.log(response)
       setListKanban(response?.data?.data)

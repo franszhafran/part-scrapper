@@ -79,7 +79,7 @@ function KanbanCreate() {
       // in my case here the field name is customFile
 
       axios.post(
-          "http://localhost:8001/import-parts",
+          "http://45.118.135.250/import-parts",
           formData,
           {
               headers: {

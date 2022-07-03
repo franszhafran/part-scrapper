@@ -8,7 +8,7 @@ function KanbanShow() {
   let params = useParams()
 
   useEffect(() => {
-    axios.get("http://localhost:8001/kanban/" + params.id_kanban)
+    axios.get("http://45.118.135.250/kanban/" + params.id_kanban)
     .then((response) => {
       console.log(response)
       setKanban(response?.data?.data[0])
