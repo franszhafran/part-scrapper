@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import {Link, useParams} from "react-router-dom"
 
+import baseUrl from "./Config.js"
+
 function KanbanShow() {
   const [kanban, setKanban] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
   let params = useParams()
 
   useEffect(() => {
-    axios.get("http://localhost:8001/kanban/" + params.id_kanban)
+    axios.get(baseUrl + "kanban/" + params.id_kanban)
     .then((response) => {
       console.log(response)
       setKanban(response?.data?.data[0])
@@ -29,7 +31,7 @@ function KanbanShow() {
       <table className="w-full rounded-t overflow-y-auto">
         <thead>
           <tr className="bg-gray-100 text-green-600 rounded">
-            <th className='p-2'>No</th>
+            <th className='p-2'>Part No</th>
             <th className='p-2'>Part Name</th>
             <th className='p-2'>QTY</th>
             <th className='p-2'>Code</th>
@@ -49,7 +51,7 @@ function KanbanShow() {
                 <td className='p-2'>{i+1}</td>
                 <td className='p-2'>{item.name}</td>
                 <td className='p-2'>{item.qty}</td>
-                <td className='p-2'>{item.number}</td>
+                <td className='p-2'>C</td>
                 <td className='p-2'>{item.price}</td>
                 <td className='p-2'>{item.price*item.qty}</td>
                 <td className='p-2'>{item.number == "D" ? item.price*item.price : 0}</td>

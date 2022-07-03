@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post("/import-parts", [ImportController::class, "importPart"]);
+Route::post("/import-library", [ImportController::class, "importLibrary"]);
 
 Route::get("/kanban", [KanbanController::class, "index"]);
 Route::get("/kanban/{id}", [KanbanController::class, "show"]);

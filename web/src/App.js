@@ -9,10 +9,13 @@ import {Link} from "react-router-dom"
 import Kanban from "./pages/Kanban.js"
 import KanbanCreate from "./pages/KanbanCreate.js"
 import KanbanShow from "./pages/KanbanShow.js"
+import LibraryCreate from './pages/LibraryCreate.js';
+import Library from './pages/Library.js';
 
 function App() {
   const [menu, setMenu] = useState([
     {text: "Kanban", active: true, "link": "/"}, 
+    {text: "Library", active: false, "link": "/library"}, 
     {text: "Resume", active: false, "link": "/resume"},
   ]);
 
@@ -34,11 +37,12 @@ function App() {
       </div>
       <div className="col-span-9 bg-gray-200 h-screen py-16 px-8">
         <div className="w-full h-100 bg-white rounded-t-lg">
-          <div className="w-full py-2 px-6 text-white bg-green-600 font-bold rounded-t-lg">Kanban</div>
           <Routes>
             <Route exact path="/" element={<Kanban />}></Route>
             <Route path="/kanban/:id_kanban" element={<KanbanShow />}></Route>
             <Route exact path="/kanban/create" element={<KanbanCreate />}></Route>
+            <Route exact path="/library/create" element={<LibraryCreate />}></Route>
+            <Route exact path="/library" element={<Library />}></Route>
           </Routes>
         </div>
       </div>

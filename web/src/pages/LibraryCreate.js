@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
-
-import baseUrl from "./Config.js"
+import baseUrl from './Config';
 
 //   const updateForm = (e) => {
 //     let initial_data = data
@@ -55,7 +54,7 @@ import baseUrl from "./Config.js"
 //   return menuContext
 // }
 
-function KanbanCreate() {
+function LibraryCreate() {
   const [formState, setFormState] = useState({})
 
   const updateForm = (e) => {
@@ -81,7 +80,7 @@ function KanbanCreate() {
       // in my case here the field name is customFile
 
       axios.post(
-          baseUrl + "import-parts",
+          baseUrl + "import-library",
           formData,
           {
               headers: {
@@ -93,11 +92,7 @@ function KanbanCreate() {
       })
     }}>
       <div className="grid grid-cols-12 py-4 px-6">
-        <div className="col-span-3 p-2">Kanban Name</div>
-        <div className="col-span-9 mb-4">
-          <input className="p-2 border border-px w-full" type="text" name="kanban_name" onChange={updateForm}></input>
-        </div>
-        <div className="col-span-3 p-2">Input File</div>
+        <div className="col-span-3 p-2">Library</div>
         <div className="col-span-9">
           <input className="p-2 border border-px w-full" type="file" name="kanban_file" onChange={updateForm}></input>
         </div>
@@ -111,4 +106,4 @@ function KanbanCreate() {
 }
 
 
-export default KanbanCreate;
+export default LibraryCreate;
