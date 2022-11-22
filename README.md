@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h3 align="center">Docker Laravel MySQL Nginx Starter</h3>
+  <h3 align="center">Docker Laravel MySQL Nginx Starter Template</h3>
 
   <p align="center">
     Project Starter For Web Application Development with Laravel, MySQL, Nginx, and Docker.
